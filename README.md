@@ -35,7 +35,7 @@ Activate virtualenv
 Install requirements
 
 ```
-pip install -r requirments.txt
+pip install -r requirements.txt
 ```
 
 Export the database uri
