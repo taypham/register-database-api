@@ -1,6 +1,6 @@
 # register-database-api
 
-An API to provide CRUD operations between sever and database. Currently the api is not hosted anywhere and will need to executed on a local machine.   The API will interact with the postgres database hosted on AWS providing get and list operations for the scope of Sprint 1.
+An API to provide CRUD operations between sever and database. Currently the api is not hosted anywhere and will need to executed on a local machine.   The API will interact with the postgres database hosted on AWS providing get and list operations for the scope of Sprint 1. Currently the API is using the other repository, we will eventually decommission. 
  
 ## Getting Started
 
