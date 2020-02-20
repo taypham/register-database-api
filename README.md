@@ -77,6 +77,30 @@ http://127.0.0.1:5000/api/v1/products/all
 
 ```
 
+### Example API Calls
+
+***Creating record:***
+```bash
+  curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"lookup_code":"lookupcode4","count":"400"}' \
+  http://localhost:5000/api/v1/products/create
+
+```
+
+***get***
+```bash
+curl http://localhost:5000/api/v1/products\?lookup\=lookupcode1
+```
+
+***Delete record:***
+```bash
+  curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"lookup_code":"lookupcode4","id":"8fb27442-53a4-11ea-92cf-acde48001122"}' \
+  http://localhost:5000/api/v1/products/delete
+```
+
 
 ### Coding style 
 
