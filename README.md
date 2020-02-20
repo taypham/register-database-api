@@ -1,6 +1,6 @@
 # register-database-api
 
-An API to provide CRUD operations between sever and database. Currently the api is not hosted anywhere and will need to executed on a local machine.   The API will interact with the postgres database hosted on AWS providing get and list operations for the scope of Sprint 1. Currently the API is using the other repository, we will eventually decommission. 
+An API to provide CRUD operations between sever and database. The API runtime environment is a custom docker container that can be found in the Dockerfile. This container executes in a dyno runtime environment.  The API will interact with the postgres database hosted on AWS providing CRUD operations.  
  
 ## Getting Started
 
@@ -9,7 +9,8 @@ A good understanding of REST principles and building flask applications would be
 
 ### Prerequisites
 
-Python 3 installed on the machine
+1. Python 3 installed on the machine
+2. Docker 
 
 For Mac OS 
 
@@ -102,6 +103,23 @@ curl http://localhost:5000/api/v1/products\?lookup\=lookupcode1
 ```
 
 
+### Deployment Locally
+In the docker file replace database_uri with the actual uri 
+```dockerfile
+ENV DATABASE_URL '<database_uri>'
+```
+
+At the root of this repository execute the command:
+```bash
+docker build -t dev-api .
+```
+
+Start the API:
+```bash
+docker run -it initial-api
+```
+
+
 ### Coding style 
 
 [PEP8 style](https://www.python.org/dev/peps/pep-0008/)
@@ -109,13 +127,11 @@ curl http://localhost:5000/api/v1/products\?lookup\=lookupcode1
 [Google Style Guide](http://google.github.io/styleguide/pyguide.html)
 
 
-## Deployment
-
-Add additional notes about how to deploy this on a live system
 
 ## Built With
 
 * [Flask](https://palletsprojects.com/p/flask/) - lightweight python web framework
+* [Docker](https://www.docker.com/resources/what-container) - container run time for flask application
 
 ## Version
 0.0.1
