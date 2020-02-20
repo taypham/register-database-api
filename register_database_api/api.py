@@ -43,7 +43,7 @@ def api_all():
     for record in record_list:
         data_record = {
             "id": record[0],
-            "lookup-code": record[1],
+            "lookup_code": record[1],
             "count": record[2],
             "creation": record[3]
         }
@@ -79,7 +79,7 @@ def product_delete():
         Exception error if unable to delete or invalid requestå
     """
     if not request.json or not 'lookup_code' in request.json:
-        abort({'message': 'Invalid query, expecting: {"id":<product_id>, "lookup_code": <lookup_code>}'},400)
+        abort({'message': 'Invalid query, expecting: {"id":<product_id>, "lookup_code": <lookup_code>}'}, 400)
     record = {
         "id": request.json["id"],
         "lookup_code": request.json["lookup_code"],
@@ -177,4 +177,5 @@ def product_filter():
         return "<h1>404</h1><p>The lookup id was not found.</p>"
 
 
-app.run()
+port = int(os.environ.get('PORT', 5000))
+app.run(host='0.0.0.0', port=port)
