@@ -20,19 +20,21 @@ import os
 import psycopg2
 import uuid
 import datetime
-
+from flask_cors import CORS
+from register_database_api import routes
 DATABASE_URL = os.environ['DATABASE_URL']
 
 app = flask.Flask(__name__)
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 app.config["DEBUG"] = True
-
+app.register_blueprint(routes.employee_api)
 
 @app.route('/api/v1/products/all', methods=['GET'])
 def api_all():
     """ Method that responds with a JSON list of records contained in the product table.
 
     Returns:
-        jsonify: An array of json objects representing each record in the database.
+        jsonify: An array of json objects representing each record in the dat®abase.
 
     """
     conn = psycopg2.connect(DATABASE_URL, sslmode='require')
