@@ -133,8 +133,10 @@ curl http://localhost:5000/api/v1/products\?lookup\=lookupcode1
 curl http://0.0.0.0:5000/api/v1/employee/all
 ```
 ***Get Record:***
-
+```bash
 curl http://0.0.0.0:5000/api/v1/employee?employeeid=123456
+```
+
 ### Deployment Locally
 In the docker file replace database_uri with the actual uri 
 ```dockerfile
