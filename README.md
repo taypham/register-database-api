@@ -104,7 +104,7 @@ curl http://https://peaceful-bastion-45955.herokuapp.com/api/v1/products\?lookup
 
 ### Employee Record Conventions:
 
-**Classification:***
+***Classification:***
 1. General Manager
 2. Shift Manager
 3. Cashier
