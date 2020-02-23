@@ -78,7 +78,7 @@ http://127.0.0.1:5000/api/v1/products/all
 
 ```
 
-### Example API Calls
+### Example API Calls Products
 
 ***Creating record:***
 ```bash
@@ -101,8 +101,40 @@ curl http://localhost:5000/api/v1/products\?lookup\=lookupcode1
   --data '{"lookup_code":"lookupcode4","id":"8fb27442-53a4-11ea-92cf-acde48001122"}' \
   http://localhost:5000/api/v1/products/delete
 ```
+### Example API Calls Employee
 
+***Create record:***
+```bash
+  curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{
+        "active": true,
+        "classification": 3,
+        "employeeid": 34523,
+        "firstname": "Bossom",
+        "lastname": "Roller",
+        "managerid": "8c460ba4-6358-4a78-9493-850ab8c43545", or  "managerid": ''
+        "password": "notnew56"
+      }' \
+  http://localhost:5000/api/v1/employee/create
 
+```
+***Delete record:***
+```bash
+  curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{
+        "id": "8e678603-9a42-457e-8dfb-12e0cb0bdd32"
+      }' \
+  http://localhost:5000/api/v1/employee/delete
+```
+***List records:***
+```bash
+curl http://0.0.0.0:5000/api/v1/employee/all
+```
+***Get Record:***
+
+curl http://0.0.0.0:5000/api/v1/employee?employeeid=123456
 ### Deployment Locally
 In the docker file replace database_uri with the actual uri 
 ```dockerfile
