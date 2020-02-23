@@ -85,13 +85,13 @@ http://127.0.0.1:5000/api/v1/products/all
   curl --header "Content-Type: application/json" \
   --request POST \
   --data '{"lookup_code":"lookupcode4","count":"400"}' \
-  http://localhost:5000/api/v1/products/create
+  http://https://peaceful-bastion-45955.herokuapp.com/api/v1/products/create
 
 ```
 
 ***Get record:***
 ```bash
-curl http://localhost:5000/api/v1/products\?lookup\=lookupcode1
+curl http://https://peaceful-bastion-45955.herokuapp.com/api/v1/products\?lookup\=lookupcode1
 ```
 
 ***Delete record:***
@@ -99,7 +99,7 @@ curl http://localhost:5000/api/v1/products\?lookup\=lookupcode1
   curl --header "Content-Type: application/json" \
   --request POST \
   --data '{"lookup_code":"lookupcode4","id":"8fb27442-53a4-11ea-92cf-acde48001122"}' \
-  http://localhost:5000/api/v1/products/delete
+  http://https://peaceful-bastion-45955.herokuapp.com/api/v1/products/delete
 ```
 ### Example API Calls Employee
 
@@ -116,7 +116,7 @@ curl http://localhost:5000/api/v1/products\?lookup\=lookupcode1
         "managerid": "8c460ba4-6358-4a78-9493-850ab8c43545", or  "managerid": ''
         "password": "notnew56"
       }' \
-  http://localhost:5000/api/v1/employee/create
+  http://https://peaceful-bastion-45955.herokuapp.com/api/v1/employee/create
 
 ```
 ***Delete record:***
@@ -126,15 +126,15 @@ curl http://localhost:5000/api/v1/products\?lookup\=lookupcode1
   --data '{
         "id": "8e678603-9a42-457e-8dfb-12e0cb0bdd32"
       }' \
-  http://localhost:5000/api/v1/employee/delete
+  http://https://peaceful-bastion-45955.herokuapp.com/api/v1/employee/delete
 ```
 ***List records:***
 ```bash
-curl http://0.0.0.0:5000/api/v1/employee/all
+curl http://https://peaceful-bastion-45955.herokuapp.com/api/v1/employee/all
 ```
 ***Get Record:***
 ```bash
-curl http://0.0.0.0:5000/api/v1/employee?employeeid=123456
+curl http://https://peaceful-bastion-45955.herokuapp.com/api/v1/employee?employeeid=123456
 ```
 
 ### Deployment Locally
