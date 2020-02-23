@@ -21,7 +21,7 @@ import psycopg2
 import uuid
 import datetime
 from flask_cors import CORS
-from register_database_api import routes
+import routes
 DATABASE_URL = os.environ['DATABASE_URL']
 
 app = flask.Flask(__name__)
