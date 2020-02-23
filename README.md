@@ -101,6 +101,17 @@ curl http://https://peaceful-bastion-45955.herokuapp.com/api/v1/products\?lookup
   --data '{"lookup_code":"lookupcode4","id":"8fb27442-53a4-11ea-92cf-acde48001122"}' \
   http://https://peaceful-bastion-45955.herokuapp.com/api/v1/products/delete
 ```
+
+### Employee Record Conventions:
+
+**Classification:***
+1. General Manager
+2. Shift Manager
+3. Cashier
+
+***When managerid is ''***
+Defaults managerid to 00000000-0000-0000-0000-000000000000 indicating no manager is present for user. 
+
 ### Example API Calls Employee
 
 ***Create record:***
