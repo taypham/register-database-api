@@ -41,6 +41,7 @@ def api_all():
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM product")
     record_list = cursor.fetchall()
+    conn.close()
     data_list = []
     for record in record_list:
         data_record = {

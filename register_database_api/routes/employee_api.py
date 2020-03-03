@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify, abort
 import psycopg2
 import os
 import uuid
+from random import randint
 
 employee_api = Blueprint('employee_api', __name__)
 
@@ -42,7 +43,7 @@ def parse_employee_info(record_list):
 
 def create_employee_object(record):
     data_record = {
-        "employeeid": record["employeeid"],
+        "employeeid": str(randint(0, 100000000)),
         "firstname": record["firstname"],
         "lastname": record["lastname"],
         "password": record["password"],
@@ -56,7 +57,7 @@ def create_employee_object(record):
 
 @employee_api.route("/api/v1/employee/all")
 def employee_list():
-    """ Method that responds with a JSON list of employees contained in the product table.
+    """ Method that responds with a JSON list of employees contained in the employee table.
 
     Returns:
         jsonify: An array of json objects representing each record in the database.
@@ -66,7 +67,7 @@ def employee_list():
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM employee")
     record_list = cursor.fetchall()
-
+    conn.close()
     data_list = parse_employee_info(record_list)
 
     return jsonify(data_list)
@@ -91,9 +92,11 @@ def filter_employee():
         query = "{} employeeid = '{}'".format(base_query, lookup_code)
         cursor.execute(query)
         record_list = cursor.fetchall()
+        conn.close()
         data_list = parse_employee_info(record_list)
         return jsonify(data_list)
     else:
+        conn.close()
         return "<h1>404</h1><p>The employeeid was not found.</p>"
 
 
@@ -105,7 +108,6 @@ def create_employee():
       {
         "active": true,
         "classification": 3,
-        "employeeid": 123444,
         "firstname": "Colton",
         "lastname": "Tucker",
         "managerid": "8c460ba4-6358-4a78-9493-850ab8c43545", or  "managerid": ""
@@ -128,14 +130,13 @@ def create_employee():
         Raises:
         Exception error if unable to connect
     """
-
     if not request.json or not 'classification' in request.json:
         abort(400)
-
     conn = psycopg2.connect(DATABASE_URL, sslmode='require')
     cursor = conn.cursor()
 
     record = create_employee_object(request.json)
+    print("Record looks like {}".format(record))
 
     with_manager_query = """INSERT INTO employee(employeeid, firstname, lastname, password, active, classification, managerid)
     VALUES
@@ -147,15 +148,16 @@ def create_employee():
         ('{}','{}','{}','{}','{}','{}');
      """
 
+
     try:
         if record["managerid"] == '':
             insert_query = without_manager_query.format(
-            record["employeeid"],
-            record["firstname"],
-            record["lastname"],
-            record["password"],
-            record["active"],
-            record["classification"])
+                record["employeeid"],
+                record["firstname"],
+                record["lastname"],
+                record["password"],
+                record["active"],
+                record["classification"])
             cursor.execute(insert_query)
             conn.commit()
         else:
@@ -176,7 +178,44 @@ def create_employee():
 
 @employee_api.route('/api/v1/employee/delete', methods=['POST'])
 def employee_delete():
-    """ REST API for product deletion
+    """ REST API for employee deletion
+
+    Args:
+        {"id":<record_id>}
+
+    Returns:
+        JSON object of record that was created, HTTP Status Code 201
+        Following is an example response
+        {
+            "status": "succeeded",
+
+        }
+    Raises:
+        Exception error if unable to delete or invalid requestå
+    """
+    if not request.json or not 'id' in request.json:
+        abort({'message': 'Invalid query, expecting: {"id":<employee_id>}'}, 400)
+    record = {
+        "id": request.json["id"],
+    }
+
+    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+    cursor = conn.cursor()
+
+    base_query = "DELETE FROM employee WHERE id ='{}'"
+
+    try:
+        insert_query = base_query.format(record["id"])
+        cursor.execute(insert_query)
+        conn.commit()
+    finally:
+        conn.close()
+    return jsonify({"status": "succeeded"}), 201
+
+
+@employee_api.route('/api/v1/employee/update', methods=['POST'])
+def employee_delete():
+    """ REST API for employee updates
 
     Args:
         {"id":<record_id>}
