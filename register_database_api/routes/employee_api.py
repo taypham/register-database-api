@@ -214,7 +214,7 @@ def employee_delete():
 
 
 @employee_api.route('/api/v1/employee/update', methods=['POST'])
-def employee_delete():
+def employee_update():
     """ REST API for employee updates
 
     Args:
