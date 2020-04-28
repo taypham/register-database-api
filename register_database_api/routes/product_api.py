@@ -27,7 +27,8 @@ def api_all():
             "id": record[0],
             "lookup_code": record[1],
             "count": record[2],
-            "creation": record[3]
+            "creation": record[3],
+            "price": record[4]
         }
         data_list.append(data_record)
 
@@ -87,7 +88,8 @@ def product_create():
           "count": "400",
           "creation": "Wed, 19 Feb 2020 23:41:15 GMT",
           "id": "9c90e37a-53a3-11ea-a78b-acde48001122",
-          "lookup_code": "lookupcode4"
+          "lookup_code": "lookupcode4",
+          "price":100
         }
 
     Raises:
@@ -100,16 +102,17 @@ def product_create():
         "id": uuid.uuid1(),
         "lookup_code": request.json["lookup_code"],
         "count": request.json["count"],
-        "creation": datetime.datetime.now()
+        "creation": datetime.datetime.now(),
+        "price": request.json["price"]
     }
 
     conn = psycopg2.connect(DATABASE_URL, sslmode='require')
     cursor = conn.cursor()
 
-    base_query = "INSERT INTO product(id,LookupCode,Count,Createdon) VALUES ('{}','{}', '{}','{}')"
+    base_query = "INSERT INTO product(id,LookupCode,Count,Createdon,price) VALUES ('{}','{}', '{}','{}','{}')"
 
     try:
-        insert_query = base_query.format(record["id"], record['lookup_code'], record['count'], record['creation'])
+        insert_query = base_query.format(record["id"], record['lookup_code'], record['count'], record['creation'], record['price'])
         cursor.execute(insert_query)
         conn.commit()
     finally:
@@ -143,7 +146,8 @@ def product_filter():
             "id": record[0][0],
             "lookup_code": record[0][1],
             "count": record[0][2],
-            "creation": record[0][3]
+            "creation": record[0][3],
+            "price": record[0][4]
         }
         return jsonify(record)
     else:
