@@ -60,19 +60,22 @@ http://127.0.0.1:5000/api/v1/products/all
     "count": 100, 
     "creation": "Thu, 30 Jan 2020 18:24:50 GMT", 
     "id": "722bfe1f-68fb-476b-bdaa-e8c9b91fb294", 
-    "lookup-code": "lookupcode1"
+    "lookup-code": "lookupcode1",
+    "price": 150
   }, 
   {
     "count": 125, 
     "creation": "Thu, 30 Jan 2020 18:24:50 GMT", 
     "id": "963ceeed-3318-4a2e-8537-096a3c18ca22", 
-    "lookup-code": "lookupcode2"
+    "lookup-code": "lookupcode2",
+    "price": 250
   }, 
   {
     "count": 150, 
     "creation": "Thu, 30 Jan 2020 18:24:50 GMT", 
     "id": "648d5dc3-252d-434e-910c-dcaed2349435", 
-    "lookup-code": "lookupcode3"
+    "lookup-code": "lookupcode3",
+    "price": 350
   }
 ]
 
@@ -84,7 +87,7 @@ http://127.0.0.1:5000/api/v1/products/all
 ```bash
   curl --header "Content-Type: application/json" \
   --request POST \
-  --data '{"lookup_code":"lookupcode4","count":"400"}' \
+  --data '{"lookup_code":"lookupcode4","count":"400","price":100}' \
   http://https://peaceful-bastion-45955.herokuapp.com/api/v1/products/create
 
 ```
@@ -146,6 +149,42 @@ curl http://https://peaceful-bastion-45955.herokuapp.com/api/v1/employee/all
 ***Get Record:***
 ```bash
 curl http://https://peaceful-bastion-45955.herokuapp.com/api/v1/employee?employeeid=123456
+```
+
+### Example API Calls Transaction
+
+***Create record:***
+```bash
+  curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{
+        "cashierid": true,
+        "productspurchased": [
+           'lookupcode1',
+           'lookupcode2'
+        ],
+        "totalproductscount": 5,
+        "transactiontotal": 25.42
+      }' \
+  http://https://peaceful-bastion-45955.herokuapp.com/api/v1/transaction/create
+
+```
+***Delete record:***
+```bash
+  curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{
+        "transactionid": "123456"
+      }' \
+  http://https://peaceful-bastion-45955.herokuapp.com/api/v1/transaction/delete
+```
+***List records:***
+```bash
+curl http://https://peaceful-bastion-45955.herokuapp.com/api/v1/transaction/all
+```
+***Get Record:***
+```bash
+curl http://https://peaceful-bastion-45955.herokuapp.com/api/v1/transaction/transactionid=123456
 ```
 
 ### Deployment Locally
