@@ -184,7 +184,7 @@ curl http://https://peaceful-bastion-45955.herokuapp.com/api/v1/transaction/all
 ```
 ***Get Record:***
 ```bash
-curl http://https://peaceful-bastion-45955.herokuapp.com/api/v1/transaction/transactionid=123456
+curl http://https://peaceful-bastion-45955.herokuapp.com/api/v1/transaction?transactionid=123456
 ```
 
 ### Deployment Locally
